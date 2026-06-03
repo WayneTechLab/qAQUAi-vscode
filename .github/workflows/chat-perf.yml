@@ -64,7 +64,7 @@ jobs:
   # ── Shared setup: build once, cache everything ──────────────────────
   setup:
     name: Build & Cache
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, waynetechlab-qaquai-vscode-mac]
     timeout-minutes: 30
     outputs:
       test_is_version: ${{ steps.resolve.outputs.is_version }}
@@ -181,7 +181,7 @@ jobs:
   chat-perf:
     name: Chat Perf (${{ matrix.group }})
     needs: setup
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, waynetechlab-qaquai-vscode-mac]
     timeout-minutes: 60
     strategy:
       fail-fast: false
@@ -357,7 +357,7 @@ jobs:
     name: Leak Check
     needs: setup
     if: inputs.skip_leak_check != true
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, waynetechlab-qaquai-vscode-mac]
     timeout-minutes: 60
     steps:
       - name: Checkout
@@ -456,7 +456,7 @@ jobs:
     name: Report
     needs: [ setup, chat-perf, leak-check ]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, macOS, waynetechlab-qaquai-vscode-mac]
     timeout-minutes: 30
     steps:
       - name: Checkout
